@@ -1,0 +1,51 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+// // from prisma web 
+// model User {
+//   id    Int     @id @default(autoincrement())
+//   email String  @unique
+//   name  String?
+//   posts Post[]
+// }
+//  this code from prisma website im just testing the code  and see look how the code works (:asta4 ali 
+// model Post {
+//   id        Int     @id @default(autoincrement())
+//   title     String
+//   content   String?
+//   published Boolean @default(false)
+//   author    User    @relation(fields: [authorId], references: [id])
+//   authorId  Int
+// }
+
+
+model Bolg{
+
+  id String @id@default(uuid())
+  title String 
+  user_id String
+  createdata DateTime @default(now())
+  user Useer @relation( fields: [user_id], references: [id])
+
+}
+
+model Useer {
+
+  id String  @id@default(uuid())
+  username   String
+  password String
+  email String @unique
+  bolg Bolg[]
+
+
+}
+
+
